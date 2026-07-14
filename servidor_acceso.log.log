@@ -1,0 +1,19 @@
+# Generador de Logs de Prueba para entrenamiento del SIEM
+$LogFile = ".\servidor_acceso.log"
+
+$Logs = @(
+    "2026-07-13 21:00:01 - IP: 192.168.1.15 - STATUS: 200 - GET /index.html - User-Agent: Mozilla/5.0",
+    "2026-07-13 21:00:05 - IP: 192.168.1.15 - STATUS: 200 - GET /contacto.html - User-Agent: Mozilla/5.0",
+    "2026-07-13 21:01:12 - IP: 10.0.0.85 - STATUS: 401 - POST /login.php - User-Agent: Mozilla/5.0 (Intento fallido 1)",
+    "2026-07-13 21:01:14 - IP: 10.0.0.85 - STATUS: 401 - POST /login.php - User-Agent: Mozilla/5.0 (Intento fallido 2)",
+    "2026-07-13 21:01:15 - IP: 10.0.0.85 - STATUS: 401 - POST /login.php - User-Agent: Mozilla/5.0 (Intento fallido 3)",
+    "2026-07-13 21:01:17 - IP: 10.0.0.85 - STATUS: 401 - POST /login.php - User-Agent: Mozilla/5.0 (Intento fallido 4)",
+    "2026-07-13 21:01:19 - IP: 10.0.0.85 - STATUS: 200 - POST /login.php - User-Agent: Mozilla/5.0 (Inicio de sesion exitoso)",
+    "2026-07-13 21:02:30 - IP: 192.168.1.104 - STATUS: 404 - GET /admin/config.php - User-Agent: Nikto/2.1.6 (Escaneo de vulnerabilidades)",
+    "2026-07-13 21:02:32 - IP: 192.168.1.104 - STATUS: 404 - GET /wp-admin - User-Agent: Nikto/2.1.6",
+    "2026-07-13 21:03:45 - IP: 172.16.5.12 - STATUS: 200 - GET /buscar.php?id=1' UNION SELECT NULL, username, password FROM users-- - User-Agent: Mozilla/5.0 (Ataque SQL Injection)",
+    "2026-07-13 21:04:10 - IP: 192.168.1.20 - STATUS: 200 - GET /noticias.html - User-Agent: Mozilla/5.0"
+)
+
+$Logs | Out-File -FilePath $LogFile -Encoding utf8
+Write-Host "[+] Archivo 'servidor_acceso.log' creado con exito para pruebas." -ForegroundColor Green

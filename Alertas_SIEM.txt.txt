@@ -1,0 +1,54 @@
+﻿==========================================================
+              REPORTE DE INCIDENTES - SIEM LOCAL
+==========================================================
+Fecha del analisis: 07/13/2026 21:41:21
+Archivo auditado: .\servidor_acceso.log
+==========================================================
+[!] ALERTA BAJA: Intento fallido de inicio de sesion
+        "2026-07-13 21:01:12 - IP: 10.0.0.85 - STATUS: 401 - POST /login.php - User-Agent: Mozilla/5.0 (Intento fallido 1)",
+
+[!] ALERTA BAJA: Intento fallido de inicio de sesion
+        "2026-07-13 21:01:14 - IP: 10.0.0.85 - STATUS: 401 - POST /login.php - User-Agent: Mozilla/5.0 (Intento fallido 2)",
+
+[!] ALERTA BAJA: Intento fallido de inicio de sesion
+        "2026-07-13 21:01:15 - IP: 10.0.0.85 - STATUS: 401 - POST /login.php - User-Agent: Mozilla/5.0 (Intento fallido 3)",
+
+[!] ALERTA BAJA: Intento fallido de inicio de sesion
+        "2026-07-13 21:01:17 - IP: 10.0.0.85 - STATUS: 401 - POST /login.php - User-Agent: Mozilla/5.0 (Intento fallido 4)",
+
+[!] ALERTA MEDIA: Escaneo automatizado detectado
+        "2026-07-13 21:02:30 - IP: 192.168.1.104 - STATUS: 404 - GET /admin/config.php - User-Agent: Nikto/2.1.6 (Escaneo de vulnerabilidades)",
+
+[!] ALERTA MEDIA: Escaneo automatizado detectado
+        "2026-07-13 21:02:32 - IP: 192.168.1.104 - STATUS: 404 - GET /wp-admin - User-Agent: Nikto/2.1.6",
+
+[!] ALERTA ALTA: Intento de SQL Injection detectado
+        "2026-07-13 21:03:45 - IP: 172.16.5.12 - STATUS: 200 - GET /buscar.php?id=1' UNION SELECT NULL, username, password FROM users-- - User-Agent: Mozilla/5.0 (Ataque SQL Injection)",
+
+==========================================================
+                   RESUMEN DE ALERTAS
+==========================================================
+Alertas Altas:  1
+Alertas Medias: 2
+Alertas Bajas:  4
+==========================================================
+
+==========================================================
+         PLAYBOOK DE MITIGACION Y RESPUESTA RECOMENDADA   
+==========================================================
+[-] PARA INYECCION SQL (ALERTA ALTA):
+    * Sanitizar y parametrizar todas las consultas a la base de datos.
+    * Validar los inputs de usuario antes de procesarlos.
+    * Implementar un Web Application Firewall (WAF) para bloquear payloads.
+
+[-] PARA ESCANEOS DE RECONOCIMIENTO (ALERTA MEDIA):
+    * Bloquear temporalmente las IPs atacantes en el Firewall perimetral.
+    * Deshabilitar cabeceras HTTP innecesarias que revelen versiones de software.
+    * Configurar limitadores de peticiones (Rate Limiting) para entorpecer los escaneos.
+
+[-] PARA FUERZA BRUTA / INTENTOS FALLIDOS (ALERTA BAJA):
+    * Implementar politicas de bloqueo de cuenta tras 3 o 5 intentos fallidos.
+    * Habilitar el Factor de Doble Autenticacion (2FA) de forma obligatoria.
+    * Monitorear si las peticiones provienen de ubicaciones inusuales o VPNs.
+
+
